@@ -220,7 +220,6 @@ class ImageUntiler():
                 except Exception as e:
                     any_exceptions = True
                     if not isinstance(e, (FileNotFoundError, JpegtranException, ZoomLevelError)):
-                       
                         self.log.warning("Unknown exception occurred while processing image {}: {} ()".format(image_url, e.__class__.__name__, e))
                 if os.path.isfile(destination) and not any_exceptions:
                     self.log.info("Dezoomifed image created and saved to {}.".format(destination))
