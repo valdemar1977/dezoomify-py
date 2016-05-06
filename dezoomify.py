@@ -214,15 +214,12 @@ class ImageUntiler():
                 self.zoom_level = zoom_level # Reinitialize zoom level between each download
                 destination = self.out_names[i]
                 self.log.info("[{}/{}] Processing image {}...".format(i + 1, len(self.image_urls), image_url))
-                any_exceptions = False
                 try:
                     self.process_image(image_url, destination)
+                    self.log.info("Dezoomifed image created and saved to {}.".format(destination))
                 except Exception as e:
-                    any_exceptions = True
                     if not isinstance(e, (FileNotFoundError, JpegtranException, ZoomLevelError)):
                         self.log.warning("Unknown exception occurred while processing image {}: {} ()".format(image_url, e.__class__.__name__, e))
-                if os.path.isfile(destination) and not any_exceptions:
-                    self.log.info("Dezoomifed image created and saved to {}.".format(destination))
 
     def process_image(self, image_url, destination):
         """Scrapes image info and calls the untiler."""
